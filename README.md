@@ -1,6 +1,6 @@
 # UI/UX Skill
 
-macOS 데스크톱 앱의 UI/UX를 설계하거나 검토할 때 쓰는 Codex 스킬입니다. Apple의 데스크톱 인터페이스 원칙을 바탕으로 작업 흐름, 시각적 위계, 접근성, 창 크기별 동작을 함께 다룹니다. SwiftUI/AppKit, Qt/QML, Flutter, 웹/Electron/Tauri 등 구현 환경을 먼저 고정하지 않아도 사용할 수 있습니다.
+데스크톱 앱의 UI/UX를 설계하거나 검토할 때 쓰는 Codex 스킬입니다. Apple의 데스크톱 인터페이스 원칙을 바탕으로 작업 흐름, 시각적 위계, 접근성, 창 크기별 동작을 함께 다룹니다. SwiftUI/AppKit, Qt/QML, Flutter, 웹/Electron/Tauri 등 구현 환경을 먼저 고정하지 않아도 사용할 수 있습니다.
 
 ## 설계 기준
 
