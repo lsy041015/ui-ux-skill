@@ -33,9 +33,37 @@
 
 ## 설치와 사용
 
-저장소를 Codex 스킬 폴더인 `$CODEX_HOME/skills/ui-ux-skill`에 복제합니다. `CODEX_HOME`을 지정하지 않았다면 `~/.codex/skills/ui-ux-skill`을 사용합니다. 이후 요청에 `$ui-ux-skill`을 붙여 호출할 수 있습니다.
+`SKILL.md`는 Codex와 Claude Code가 공통으로 읽는 형식(`name`·`description` frontmatter)입니다. 같은 저장소를 각 호스트의 스킬 폴더에 복제하면 됩니다. `agents/openai.yaml`은 Codex UI 표시용이며 Claude Code는 무시합니다.
+
+### Codex
+
+저장소를 Codex 스킬 폴더인 `$CODEX_HOME/skills/ui-ux-skill`에 복제합니다. `CODEX_HOME`을 지정하지 않았다면 `~/.codex/skills/ui-ux-skill`을 사용합니다.
+
+```bash
+git clone https://github.com/lsy041015/ui-ux-skill.git ~/.codex/skills/ui-ux-skill
+```
+
+요청에 `$ui-ux-skill`을 붙여 호출합니다.
 
 예: “`$ui-ux-skill`을 사용해 할 일 관리 앱의 데스크톱 화면을 설계하고, 키보드와 작은 창 동작까지 검토해줘.”
+
+### Claude Code
+
+모든 프로젝트에서 쓰려면 사용자 스킬 폴더에, 특정 프로젝트에서만 쓰려면 프로젝트의 `.claude/skills/`에 복제합니다.
+
+```bash
+# 사용자 전역 (Windows: %USERPROFILE%\.claude\skills\ui-ux-skill)
+git clone https://github.com/lsy041015/ui-ux-skill.git ~/.claude/skills/ui-ux-skill
+
+# 또는 프로젝트 전용
+git clone https://github.com/lsy041015/ui-ux-skill.git .claude/skills/ui-ux-skill
+```
+
+새 세션을 시작하면 스킬 목록에 `ui-ux-skill`이 나타납니다. Claude가 데스크톱 UI/UX 설계·검토 요청에서 자동으로 불러오며, 직접 호출하려면 `/ui-ux-skill`을 입력합니다.
+
+예: “`/ui-ux-skill` 할 일 관리 앱의 데스크톱 화면을 설계하고, 키보드와 작은 창 동작까지 검토해줘.”
+
+업데이트는 두 호스트 모두 복제한 폴더에서 `git pull`입니다.
 
 ## 적용 데모: Relay · 메모
 
