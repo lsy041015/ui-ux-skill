@@ -6,64 +6,40 @@
 
 # UI/UX Skill
 
-> **A Codex and Claude Code skill that makes the agent cover window behavior, task flow, accessibility and verification when it designs or reviews a desktop app screen.**
+A small skill that makes Codex or Claude Code think about window behavior, task flow, accessibility and verification when it designs a desktop app screen.
 
-Based on Apple's macOS Human Interface Guidelines; the framework (SwiftUI/AppKit, Qt/QML, Flutter, web/Electron/Tauri) can be chosen later.
+It's based on Apple's macOS Human Interface Guidelines, and the framework (SwiftUI, Qt, Electron, whatever) can be picked later.
+Instead of one long guide, the rules are split into six modules of under 300 characters each. `SKILL.md` only says which module
+to read when, so the agent loads just what the current step needs. All seven files together are 1,048 characters.
 
-> **Status: a small rule set with no version number.** One `SKILL.md`, six rule modules and three demo screenshots. No tests or CI.
+- `macos.md`, `research.md` — the defaults: desktop conventions, and finding similar screens on Refero, Mobbin and Uiverse with a note on why one was picked
+- `flow.md`, `visual.md` — empty, loading, error, done and undo states; hierarchy and icons. Rules are checkable, like "never hide a feature behind hover alone"
+- `platforms.md` — write a technology-independent spec first, then map it to the target's native components
+- `verify.md` — small windows, dark mode, large text, keyboard, screen reader, contrast, and actually doing the core task
 
-## Why
-
-The skill holds the agent to four criteria: **familiar desktop behavior** (resizable windows, sidebar, toolbar, menus,
-shortcuts), **short, clear copy** (labels or tooltips for ambiguous icons, error recovery kept), **complete flows** (empty,
-loading, error, done, undo) and **accessibility and verification** (small window, dark mode, large text, keyboard, screen
-reader, contrast, focus, reduced motion).
-
-## How it works
-
-`SKILL.md` holds no rules. It only says which module to read when, so the agent loads just what the current step needs.
-Sizes are for the committed files, newlines included; even in bytes (3 per Korean character) every file stays under 300.
-
-| File | Read | What the agent does | Chars | Bytes |
-|---|---|---|---:|---:|
-| `SKILL.md` | on invocation | Routes to the modules below | 234 | 264 |
-| `macos.md` | by default | Desktop conventions, fewer deep steps and modals, system behavior | 169 | 276 |
-| `research.md` | by default | Compares similar tasks on Refero, Mobbin and Uiverse; records why a pattern was chosen | 178 | 288 |
-| `flow.md` | for flow design | Core task findable first; empty, loading, error, done and undo states | 108 | 258 |
-| `visual.md` | for visual design | Hierarchy, consistent icons, no hover-only features, motion only to show state | 109 | 256 |
-| `platforms.md` | for implementation | Technology-independent spec first, then native components; no forced HTML/CSS | 139 | 254 |
-| `verify.md` | before finishing | Window sizes, themes, keyboard, screen reader, large text, contrast, focus, reduced motion; runs the core task and error recovery | 111 | 262 |
-
-Research sources: [Apple macOS HIG](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos/)
-(baseline), [Refero iOS Apps](https://refero.design/ios-apps) (screen layouts), [Mobbin](https://mobbin.com/) (flows) and
-[Uiverse](https://uiverse.io/) (control details). Mobile patterns are redesigned for the desktop, reference screens and assets
-are never cloned, and an unreachable source is reported.
+Research happens on [Refero](https://refero.design/ios-apps), [Mobbin](https://mobbin.com/) and [Uiverse](https://uiverse.io/),
+with [Apple's macOS HIG](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos/) as the baseline.
+Mobile screens get redesigned for the desktop, and reference screens or assets are never copied as-is.
 
 ## Demo
 
-**Relay · 데모** is a task-list demo built with the skill: today/all/completed views, search, add/complete/undo and today's
-progress. The sidebar turns into tabs in narrow windows, and the demo follows system dark mode and reduced motion. Task data
-lives only in page memory and resets on refresh.
+**Relay · 데모** is a task-list demo built with the skill. The sidebar turns into tabs in narrow windows, and it follows system
+dark mode and reduced motion. Data lives only in memory, so a refresh resets it.
 
 <p align="center">
-  <img src="preview-desktop.png" alt="Relay · 데모 in light mode: sidebar with Today 2, All 3, Completed 1 and a 1/2 progress card" width="100%">
+  <img src="preview-desktop.png" alt="Relay · 데모 in light mode: sidebar, today's task list and a progress card" width="100%">
 </p>
-<p align="center"><sub>Default window, light mode, 1280×800.</sub></p>
 
 <table>
   <tr>
     <td width="62%"><img src="preview-dark.png" alt="The same screen in dark mode" width="100%"></td>
     <td width="38%"><img src="preview-small.png" alt="Narrow window with tabs instead of a sidebar" width="100%"></td>
   </tr>
-  <tr>
-    <td align="center"><sub>Dark mode, 1280×800.</sub></td>
-    <td align="center"><sub>Narrow window, 700×700.</sub></td>
-  </tr>
 </table>
 
 ## Install
 
-Both hosts read the same `name`/`description` frontmatter. `agents/openai.yaml` is only a Codex display name.
+The same folder works in both Codex and Claude Code.
 
 ```bash
 # Codex: $CODEX_HOME/skills/ui-ux-skill (default below), then add $ui-ux-skill to a request
@@ -76,28 +52,15 @@ git clone https://github.com/lsy041015/ui-ux-skill.git ~/.claude/skills/ui-ux-sk
 git clone https://github.com/lsy041015/ui-ux-skill.git .claude/skills/ui-ux-skill
 ```
 
-Claude Code lists the skill in the next session and loads it for desktop UI/UX requests; call it explicitly with
-`/ui-ux-skill`. Update with `git pull` in the cloned folder.
-
-## Usage
+Claude Code picks it up from the next session for desktop UI/UX requests, or you can call `/ui-ux-skill` directly.
+To update, run `git pull` in the cloned folder.
 
 Example: “`$ui-ux-skill`을 사용해 할 일 관리 앱의 데스크톱 화면을 설계하고, 키보드와 작은 창 동작까지 검토해줘.”
-("Design a to-do app's desktop screen and review keyboard and small-window behavior.") In Claude Code, start with `/ui-ux-skill`.
+("Design a to-do app's desktop screen and review keyboard and small-window behavior.")
 
-## Design notes
+## Rough edges
 
-- Rules are checkable sentences, such as "never hide a feature behind hover alone" (`visual.md`).
-- Verification means doing the core task and error recovery, and comparing captures with the requirements (`verify.md`).
+No version number or tests, and the demo's source isn't in the repo (just the screenshots). The research step needs the three
+external sites; if they can't be reached, the agent just says so. There's no license file.
 
-## Limits
-
-No version, changelog, tests or CI. Desktop apps only, and no output template. The research step needs the three external
-sites. The demo's source code is not included.
-
-## Credits
-
-The four sources are only linked, with no affiliation implied; none of their screens or assets are here. The screenshots show this repository's own demo. There is no license file.
-
----
-
-<p align="center"><sub>LSY.KOR · <a href="https://github.com/lsy041015">More projects</a></sub></p>
+<sub>[More projects](https://github.com/lsy041015)</sub>
