@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/ui-ux-skill-banner.png" alt="UI/UX Skill — macOS 원칙을 바탕으로 한, 프레임워크와 무관한 데스크톱 UI/UX 스킬" width="100%">
+  <img src="assets/ui-ux-skill-banner.png" alt="UI/UX Skill — macOS 원칙을 바탕으로 한, 프레임워크와 무관한 데스크톱 UI/UX 스킬" width="560">
 </p>
 
 <p align="center"><b>한국어</b> · <a href="README.en.md">English</a></p>

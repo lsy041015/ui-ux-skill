@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/ui-ux-skill-banner.png" alt="UI/UX Skill — a macOS-inspired desktop UI/UX skill for any framework" width="100%">
+  <img src="assets/ui-ux-skill-banner.png" alt="UI/UX Skill — a macOS-inspired desktop UI/UX skill for any framework" width="560">
 </p>
 
 <p align="center"><a href="README.md">한국어</a> · <b>English</b></p>
